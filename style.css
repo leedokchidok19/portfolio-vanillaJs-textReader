@@ -1,0 +1,17 @@
+nav, section.container {
+  max-width: 1920px;
+}
+h1.title {
+  text-align: center;
+}
+.container {
+  margin-top: 1rem;
+  text-align: center;
+}
+.item {
+  margin-bottom: 1rem;
+}
+.item textarea {
+  width: 100%;
+  margin-top: 0.25rem;
+}
