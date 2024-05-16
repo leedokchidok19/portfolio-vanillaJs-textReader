@@ -27,6 +27,7 @@ function displayContents(lines) {
   });
 
   document.getElementById('saveBtn').style.display = 'block';
+  document.getElementById('tempSave').style.display = 'block';
 
 }
 
@@ -51,3 +52,63 @@ function saveTextFile(text, filename) {
   a.download = filename;
   a.click();
 }
+//임시저장
+const tempSaveBtn = document.querySelector('#tempSave');
+tempSaveBtn.addEventListener('click', () => {
+
+  const items = document.querySelectorAll('#content .item');
+  const dataToSave = [];//초기화
+
+  items.forEach((item) => {
+
+    const textContent = item.querySelector('div').textContent;//질문
+    const textareaValue = item.querySelector('textarea').value;//답변
+
+    dataToSave.push({ textContent, textareaValue });
+  });
+
+  localStorage.setItem('temp', JSON.stringify(dataToSave));
+
+  alert('임시 저장 되었습니다.');
+
+});
+
+//불러오기
+const tempLoadBtn = document.querySelector('#tempLoad');
+tempLoadBtn.addEventListener('click', () => {
+  //저장된 데이터 가져오기
+  let temp = localStorage.getItem('temp');
+
+  if (temp === null){
+    return alert('저장된 데이터가 없습니다.');
+  }
+
+  const savedData = JSON.parse(temp);
+
+  const contents = document.querySelector('#content');
+  contents.innerHTML = '';//초기화
+
+  savedData.forEach((data) => {
+
+    const newItem = document.createElement('div');
+    newItem.classList.add('item');
+
+    //질문
+    const textContentDiv = document.createElement('div');
+    textContentDiv.textContent = data.textContent;
+
+    //답변
+    const textarea = document.createElement('textarea');
+    textarea.rows = 4;
+    textarea.value = data.textareaValue;
+
+    newItem.appendChild(textContentDiv);
+    newItem.appendChild(textarea);
+    contents.appendChild(newItem);
+
+  });
+
+  alert('저장된 데이터를 불러왔습니다.');
+
+});
+
