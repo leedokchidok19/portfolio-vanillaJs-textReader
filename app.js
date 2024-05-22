@@ -1,3 +1,16 @@
+/*
+top 버튼
+*/
+const HTML_HEIGHT = window.innerHeight;
+const TOP_BTN = document.querySelector('.topBtn');
+window.addEventListener('scroll', () => toggleTopBtn(TOP_BTN));
+
+function toggleTopBtn(topBtn){
+  const y = window.scrollY;
+  if(y >= HTML_HEIGHT) topBtn.classList.remove('d-none');
+  else topBtn.classList.add('d-none');
+}
+
 document.getElementById('fileInput').addEventListener('change', textValue => {
 
   const file = textValue.target.files[0];
@@ -53,8 +66,8 @@ function saveTextFile(text, filename) {
   a.click();
 }
 //임시저장
-const tempSaveBtn = document.querySelector('#tempSave');
-tempSaveBtn.addEventListener('click', () => {
+const TEMP_SAVE_BTN = document.querySelector('#tempSave');
+TEMP_SAVE_BTN.addEventListener('click', () => {
 
   const items = document.querySelectorAll('#content .item');
   const dataToSave = [];//초기화
@@ -74,8 +87,8 @@ tempSaveBtn.addEventListener('click', () => {
 });
 
 //불러오기
-const tempLoadBtn = document.querySelector('#tempLoad');
-tempLoadBtn.addEventListener('click', () => {
+const TEMP_LOAD_BTN = document.querySelector('#tempLoad');
+TEMP_LOAD_BTN.addEventListener('click', () => {
   //저장된 데이터 가져오기
   let temp = localStorage.getItem('temp');
 

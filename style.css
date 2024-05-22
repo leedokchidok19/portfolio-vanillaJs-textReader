@@ -13,6 +13,10 @@ ol {
   text-align: left;
 }
 
+.d-none {
+  display: none !important;
+}
+
 nav, section.container {
   max-width: var(--var-max-width);
 }
